@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Senaa Hocammm — İyi ki Doğdunuz</title>
+<style>
+:root{--bg:#130d1b;--pink:#ff9fca;--gold:#ffe1a3;--white:#fff9fd}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% 20%,#38203f 0,#130d1b 55%,#09070d 100%);color:var(--white);font-family:Georgia,serif;overflow-x:hidden}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:20}.stars{position:fixed;inset:0;pointer-events:none;opacity:.45;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:45px 45px;animation:drift 25s linear infinite}
+#intro{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;text-align:center;padding:25px;background:#100a16;transition:opacity .9s,visibility .9s}
+#intro.hide{opacity:0;visibility:hidden}.introbox{max-width:520px}.tiny{font:600 11px Arial;letter-spacing:4px;text-transform:uppercase;opacity:.6}.introbox h1{font-size:clamp(45px,12vw,82px);line-height:.9;margin:18px 0;color:var(--gold)}button{border:0;border-radius:999px;padding:15px 28px;background:linear-gradient(135deg,var(--pink),var(--gold));color:#271327;font-weight:800;cursor:pointer;box-shadow:0 10px 35px #ff9fca44;font-size:15px}
+main{max-width:760px;margin:auto;padding:0 20px 80px}.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.hero h1{font-size:clamp(44px,12vw,86px);line-height:.88;margin:20px 0;color:var(--gold);text-shadow:0 0 35px #ffb8dc33}.hero h2{font-size:clamp(24px,6vw,38px);color:var(--pink);margin:0}.heart{font-size:48px;margin:25px;animation:pulse 1.6s infinite}.scroll{font:11px Arial;letter-spacing:3px;opacity:.55;margin-top:35px}
+.card{background:#ffffff0c;border:1px solid #ffffff18;border-radius:30px;padding:34px 25px;box-shadow:0 20px 80px #0008;backdrop-filter:blur(12px);line-height:1.85;font-size:18px;margin-bottom:30px}.card h3{text-align:center;color:var(--gold);font-size:27px;margin-top:0}.highlight{font-weight:bold;color:var(--pink);font-size:21px}.surprise{display:none;text-align:center}.surprise.show{display:block;animation:appear .8s ease}.footer{text-align:center;font:11px Arial;letter-spacing:2px;opacity:.45;margin-top:45px}
+@keyframes pulse{50%{transform:scale(1.16)}}@keyframes drift{to{background-position:90px 90px}}@keyframes appear{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="stars"></div><canvas id="confetti"></canvas>
+
+<div id="intro">
+  <div class="introbox">
+    <div class="tiny">Sizin için küçük bir sürpriz</div>
+    <h1>SENAA<br>HOCAMMM</h1>
+    <p>Hazırsanız başlayalım...</p>
+    <button onclick="start()">Sürprizi Aç</button>
+  </div>
+</div>
+
+<main>
+<section class="hero">
+  <div class="tiny">Bugün özel bir gün</div>
+  <h1>BİRTANECİK<br>SENAA HOCAMMM</h1>
+  <h2>İyi ki doğdunuz!</h2>
+  <div class="heart">♡</div>
+  <div class="scroll">AŞAĞI KAYDIR ↓</div>
+</section>
+
+<section class="card">
+<h3>Size küçük bir doğum günü notu</h3>
+<p class="highlight">İyi ki doğdunuz, doğum gününüz kutlu olsun hocammm!</p>
+<p>Yeni yaşınız size bolca mutluluk, huzur, sağlık ve birbirinden güzel anılar getirsin.</p>
+<p><b>Overthinksiz</b>, kafanızın rahat olduğu, yüzünüzün hep güldüğü nice senelereee.</p>
+<p>Hayatta istediğiniz her şeye bir adım daha yaklaşmanız, emek verdiğiniz her şeyin karşılığını almanız ve önünüze çıkan güzel şeylerin hiç bitmemesi dileğiyle.</p>
+<p>İyi ki varsınız, iyi ki yollarımız kesişmiş. Yeni yaşınızın size çok güzel şeyler getirmesi dileğiyle...</p>
+</section>
+
+<section class="card" style="text-align:center">
+<h3>Bir sürpriz daha var...</h3>
+<p>Buraya kadar geldiyseniz bunu da hak ettiniz.</p>
+<button onclick="reveal()">Sürprizi Göster</button>
+<div id="surprise" class="surprise">
+<p class="highlight">Yeni yaşınızın en güzel kısmı henüz başlamadı.</p>
+<p>Umarım önünüzdeki yıl, geriye dönüp baktığınızda “iyi ki” diyeceğiniz anlarla dolu olur.</p>
+<p style="font-size:30px">♡</p>
+</div>
+</section>
+
+<div class="footer">İYİ Kİ DOĞDUNUZ • SENAA HOCAMMM</div>
+</main>
+
+<audio id="music" loop>
+<!-- Google Sites'a eklerken buraya telifsiz bir MP3 bağlantısı eklenebilir. -->
+</audio>
+
+<script>
+function start(){
+ document.getElementById('intro').classList.add('hide');
+ firework();
+ // Tarayıcılar kullanıcı etkileşimi olmadan müziği engelleyebilir.
+ const m=document.getElementById('music'); if(m.src) m.play().catch(()=>{});
+}
+function reveal(){
+ document.getElementById('surprise').classList.add('show'); firework();
+}
+function firework(){
+ const c=document.getElementById('confetti'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+ let a=[];for(let i=0;i<150;i++)a.push({x:innerWidth/2,y:innerHeight*.35,vx:(Math.random()-.5)*11,vy:(Math.random()-.9)*11,g:.25,s:Math.random()*7+3,r:Math.random()*6});
+ let t=0;(function f(){x.clearRect(0,0,c.width,c.height);a.forEach(p=>{p.x+=p.vx;p.vy+=p.g;p.y+=p.vy;p.r+=.15;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=['#ff9fca','#ffe1a3','#ffffff','#bda4ff'][Math.floor(Math.random()*4)];x.fillRect(0,0,p.s,p.s);x.restore()});if(t++<130)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height)})();
+}
+</script>
+</body>
+</html>
